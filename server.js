@@ -1,17 +1,21 @@
-import dotenv from 'dotenv';
-import express from 'express';
+const dotenv = require('dotenv');
+const express = require('express');
+const customerRouter = require('./server/routes/customer');
+const connectDB = require('./server/config/db');
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4545;
+const PORT = process.env.PORT || 4000;
+
+// Connect to Database
+connectDB();
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+app.use('/', customerRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
