@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import connectDB from './server/config/db.js';
 import pageRoute from './server/routes/pageRoute.js';
+import userRoute from './server/routes/userRoute.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', pageRoute);
+app.use('/register', userRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
