@@ -2,30 +2,17 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    firstName: {
+    name: {
         type: String,
         required: true,
-        trim: true
-    },
-    lastName: {
-        type: String,
         trim: true
     },
     email: {
         type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
+        unique: true,
         required: true
     },
-    phoneNumber: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    address: {
+    password: {
         type: String,
         required: true
     }
