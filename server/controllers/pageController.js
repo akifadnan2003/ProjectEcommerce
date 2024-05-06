@@ -3,7 +3,7 @@ const homepage = async (req, res) => {
         title: 'Home Page',
         description: 'This is the home page'
     }
-    res.render('index.ejs', locals);
+    res.render('index');
 }
 
 const register = async (req, res) => {
