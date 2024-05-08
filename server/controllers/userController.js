@@ -4,9 +4,14 @@ import User from '../models/userModel.js';
 const registerUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
+
+        // Don't send back the password hash
+        const userObj = user.toObject();
+        delete userObj.password;
+
         res.status(201).json({
             success: true,
-            data: user
+            data: userObj
         });
     } catch (error) {
         res.status(500).json({
@@ -16,4 +21,4 @@ const registerUser = async (req, res) => {
     }
 }
 
-export { registerUser }; 
+export { registerUser };
