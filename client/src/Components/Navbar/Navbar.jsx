@@ -5,18 +5,14 @@ import cart_icon from '../Assets/cart_icon.png'
 import nav_dropdown from '../Assets/nav_dropdown.png'
 import { Link } from 'react-router-dom'
 import { ShopContext } from '../../Context/ShopContext'
-
 const Navbar = () => {
-
     const [menu,setMenu] = useState("shop");
     const {getTotalCartItems}= useContext(ShopContext);
     const menuRef = useRef();
-
     const dropdown_toggle = (e) => {
       menuRef.current.classList.toggle('nav-menu-visible');
       e.target.classList.toggle('open');
     }
-
   return (
     <div className='navbar'>
       <Link to='/' onClick={()=>{setMenu("shop")}} className="nav-logo">
@@ -29,7 +25,16 @@ const Navbar = () => {
         <li onClick={()=>{setMenu("mens")}}><Link to='/Thick Curtains'>Thick Curtains</Link>{menu==="Thick Curtains"?<hr/>:<></>}</li>
         <li onClick={()=>{setMenu("womens")}}><Link to="Anti UV Curtains">Anti UV Curtains</Link>{menu==="Anti UV Curtains"?<hr/>:<></>}</li>
         <li onClick={()=>{setMenu("kids")}}><Link to='/Window Blinds'>Window Blinds</Link>{menu==="Window Blinds"?<hr/>:<></>}</li>
+        <li onClick={()=>{setMenu("Contact")}}><Link to='/Contact'>Contact</Link>{menu==="Contact"?<hr/>:<></>}</li>
+        <li onClick={()=>{setMenu("About Us")}}><Link to='/About Us'>About Us</Link>{menu==="About Us"?<hr/>:<></>}</li>
       </ul>
+      <div class="search-box">
+    <button class="btn-search"><i class="fas fa-search"></i></button>
+    <input type="text" class="input-search" placeholder="Type to Search..."/>
+    <img src="./Assets/icons8-search.gif" alt="" />
+  </div>
+
+
       <div className="nav-login-cart">
         <Link to='/login'><button>Login</button></Link>
         <Link to='/cart'><img src={cart_icon} alt="" /></Link>
