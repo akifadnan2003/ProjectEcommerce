@@ -1,47 +1,49 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Navbar.css'
 import logo from '../Assets/logo.png'
 import cart_icon from '../Assets/cart_icon.png'
-import nav_dropdown from '../Assets/nav_dropdown.png'
 import { Link } from 'react-router-dom'
 import { ShopContext } from '../../Context/ShopContext'
+import AboutUs from '../../Pages/AboutUs';
+
 const Navbar = () => {
     const [menu,setMenu] = useState("shop");
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const {getTotalCartItems}= useContext(ShopContext);
-    const menuRef = useRef();
-    const dropdown_toggle = (e) => {
-      menuRef.current.classList.toggle('nav-menu-visible');
-      e.target.classList.toggle('open');
-    }
-  return (
-    <div className='navbar'>
-      <Link to='/' onClick={()=>{setMenu("shop")}} className="nav-logo">
-        <img src={logo} alt="" />
-        <p>Dijital Dokuma</p>
-      </Link>
-      <img onClick={dropdown_toggle} className='nav-dropdown' src={nav_dropdown} alt="" />
-      <ul ref={menuRef} className="nav-menu">
-        <li onClick={()=>{setMenu("shop")}}><Link to='/'>Shop</Link>{menu==="shop"?<hr/>:<></>}</li>
-        <li onClick={()=>{setMenu("mens")}}><Link to='/Thick Curtains'>Thick Curtains</Link>{menu==="Thick Curtains"?<hr/>:<></>}</li>
-        <li onClick={()=>{setMenu("womens")}}><Link to="Anti UV Curtains">Anti UV Curtains</Link>{menu==="Anti UV Curtains"?<hr/>:<></>}</li>
-        <li onClick={()=>{setMenu("kids")}}><Link to='/Window Blinds'>Window Blinds</Link>{menu==="Window Blinds"?<hr/>:<></>}</li>
-        <li onClick={()=>{setMenu("Contact")}}><Link to='/Contact'>Contact</Link>{menu==="Contact"?<hr/>:<></>}</li>
-        <li onClick={()=>{setMenu("About Us")}}><Link to='/About Us'>About Us</Link>{menu==="About Us"?<hr/>:<></>}</li>
-      </ul>
-      <div class="search-box">
-    <button class="btn-search"><i class="fas fa-search"></i></button>
-    <input type="text" class="input-search" placeholder="Type to Search..."/>
-    <img src="./Assets/icons8-search.gif" alt="" />
-  </div>
 
-
-      <div className="nav-login-cart">
-        <Link to='/login'><button>Login</button></Link>
-        <Link to='/cart'><img src={cart_icon} alt="" /></Link>
-        <div className="nav-cart-count">{getTotalCartItems()}</div>
-      </div>
-    </div>
-  )
+    return (
+        <div className='navbar'>
+            <Link to='/' onClick={()=>{setMenu("shop")}} className="nav-logo">
+                <img src={logo} alt="" />
+                <p>Dijital Dokuma</p>
+            </Link>
+            <ul className="nav-menu">
+                <li onClick={()=>{setMenu("shop")}}><Link to='/'>Shop</Link>{menu==="shop"?<hr/>:<></>}</li>
+                <div className="dropdown" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                    <button className="dropbtn">Categories</button>
+                    {isDropdownOpen && (
+                        <div className="dropdown-content">
+                            <li onClick={()=>{setMenu("Thick Curtains")}}><Link to='/Thick Curtains'>Thick Curtains</Link>{menu==="Thick Curtains"?<hr/>:<></>}</li>
+                            <li onClick={()=>{setMenu("Anti UV Curtains")}}><Link to="Anti UV Curtains">Anti UV Curtains</Link>{menu==="Anti UV Curtains"?<hr/>:<></>}</li>
+                            <li onClick={()=>{setMenu("Window Blinds")}}><Link to='/Window Blinds'>Window Blinds</Link>{menu==="Window Blinds"?<hr/>:<></>}</li>
+                        </div>
+                    )}
+                </div>
+                <li onClick={()=>{setMenu("Contact")}}><Link to='/Contact'>Contact</Link>{menu==="Contact"?<hr/>:<></>}</li>
+                <li onClick={()=>{setMenu("AboutUs")}}><Link to='/AboutUs'>About Us</Link>{menu==="AboutUs"?<hr/>:<></>}</li>
+            </ul>
+            <div className={`search-box ${isSearchOpen ? 'open' : ''}`} onMouseEnter={() => setIsSearchOpen(true)} onMouseLeave={() => setIsSearchOpen(false)}>
+                <button className="btn-search"><i className="fas fa-search"></i></button>
+                <input type="text" className="input-search" placeholder="Type to Search..."/>
+            </div>
+            <div className="nav-login-cart">
+                <Link to='/login'><button>Login</button></Link>
+                <Link to='/cart'><img src={cart_icon} alt="" /></Link>
+                <div className="nav-cart-count">{getTotalCartItems()}</div>
+            </div>
+        </div>
+    )
 }
 
 export default Navbar
