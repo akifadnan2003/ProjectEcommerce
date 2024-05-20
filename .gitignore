@@ -14,7 +14,6 @@ client/build
 
 # misc
 .DS_Store
-config.env
 .env
 .env.local
 .env.development.local

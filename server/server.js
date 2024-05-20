@@ -6,10 +6,9 @@ import userRoute from './routes/userRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import morgan from 'morgan'; // For logging requests
 
-dotenv.config({path:'config.env'});
+dotenv.config();
 
 const app = express();
-
 const PORT = process.env.PORT || 3476;
 
 // Connect to Database
