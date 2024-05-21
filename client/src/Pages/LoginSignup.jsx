@@ -53,6 +53,7 @@ const LoginSignup = () => {
           <input type="password" placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} required />
         </div>
         <button type="submit">Continue</button>
+        <button className='Googlebutton' type="submit">Sign up with Google</button>
         <p className="loginsignup-login">Already have an account? <span>Login here</span></p>
         <div className="loginsignup-agree">
           <input type="checkbox" checked={isChecked} onChange={e => setIsChecked(e.target.checked)} name='' id='' required />
