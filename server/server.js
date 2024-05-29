@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import userRoute from './routes/userRoute.js';
 import adminRoute from './routes/adminRoute.js';
+import categoryRoute from './routes/categoryRoute.js';
 import morgan from 'morgan'; // For logging requests
 
 dotenv.config();
@@ -30,6 +31,7 @@ if(process.env.NODE_ENV === 'development') {
 // Routes
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
+app.use('/category', categoryRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
