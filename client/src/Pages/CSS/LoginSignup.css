@@ -42,6 +42,17 @@
     font-weight: 500;
     cursor: pointer;
 }
+.Googlebutton{
+    width: 100%;
+    height: 60px;
+    color: white;
+    background: skyblue;
+    margin-top: 30px;
+    border: none;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+}
 .loginsignup-login{
     margin-top: 20px;
     color: #5c5c5c;
