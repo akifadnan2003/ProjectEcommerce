@@ -53,6 +53,14 @@ const registerUser = async (req, res) => {
             ...req.body,
             password: hashedPassword
         });
+        // Hash the password
+        const hashedPassword = await hashPassword(req.body.password);
+
+        // Replace the plain text password with the hashed password
+        const user = await User.create({
+            ...req.body,
+            password: hashedPassword
+        });
 
         res.status(201).json({
             success: true,

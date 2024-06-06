@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Dijital Dokuma Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+- ProjectEcommerce is an e-commerce web application built using React, Node.js, Express, MongoDB, and Bootstrap. It provides a platform for users to browse products, add them to their cart, and complete purchases.
 
-## Available Scripts
+## Features
+- Product Listings: Display a list of available products with details such as name, price, and description.
+- User Authentication: Allow users to sign up, log in, and manage their profiles.
+- Shopping Cart: Enable users to add products to their cart, view the cart, and proceed to checkout.
+- Order Management: Track orders, view order history, and manage order status.
+- Admin Panel: Provide an admin dashboard for managing products, users, and orders.
+- <b>Key Feature:</b> Generate different patterns with AI using Pattern Generator, available only for admins.
 
-In the project directory, you can run:
+## Installation
+1. Clone the repository: <br>
+`git clone https://github.com/akifadnan2003/ProjectEcommerce.git`
+2. Install dependencies for both server and client:<br>
+`cd ProjectEcommerce/server && npm i` <br>
+`cd ../client && npm i`
+3. Set up environment variables inside server folder: port(not mandatory), database connection string, JWT secret.
+4. Start both server and client sides. <br>
+`npm start` <br> `cd ../server && npm start`
+5. Access the application at `http://localhost:3000`.
 
-### `npm start`
+## Contribution
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a feature branch.
+3. Make changes and commit them.
+4. Submit a pull request.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## License
+This project is licensed under the MIT License.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Contact Information
 
-### `npm test`
+[@ahmadfarhan203](https://github.com/ahmadfarhan203) <br>
+[@akifadnan2003](https://github.com/akifadnan2003) <br>
+[@AnasYusuf14](https://github.com/AnasYusuf14) <br>
+[@bilalyarmaci](https://github.com/bilalyarmaci) <br>
+[@MustafaCanErsoy](https://github.com/MustafaCanErsoy)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
