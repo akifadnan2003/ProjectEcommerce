@@ -54,7 +54,7 @@ const LoginSignup = () => {
         </div>
         <button type="submit">Continue</button>
         <button className='Googlebutton' type="submit">Sign up with Google</button>
-        <p className="loginsignup-login">Already have an account? <span>Login here</span></p>
+        <p className="loginsignup-login">Already have an account? <span><button><a href="./Login">Login here</a></button></span></p>
         <div className="loginsignup-agree">
           <input type="checkbox" checked={isChecked} onChange={e => setIsChecked(e.target.checked)} name='' id='' required />
           <p>By continuing, i agree to the terms of use & privacy policy.</p>
