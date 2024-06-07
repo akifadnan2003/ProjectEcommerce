@@ -1,7 +1,7 @@
 import Category from '../models/categoryModel.js';
 import slugify from 'slugify';
 import asyncHandler from 'express-async-handler';
-
+import ApiError  from '../utils/apiError.js';   
 //@desc Get all categories
 //@route GET /category
 //@access Public
@@ -17,11 +17,11 @@ export const getCategories = asyncHandler(async (req, res) => {
 //@desc Get a specific category by id
 //@route GET /category/:id
 //@access Public
-export const getCategory = asyncHandler(async (req, res) => {
+export const getCategory = asyncHandler(async (req, res ,next) => {
     const {id} = req.params;
     const category = await Category.findById(id);
     if(!category){
-        res.status(404).json({msg :`Category not found for this ID: ${id}`});
+       return next(new ApiError(`Category not found for this ID: ${id}`,404));
     }
     res.status(200).json({data:category});
 }); 
@@ -38,12 +38,12 @@ export const createCategory = asyncHandler(async (req, res) => {
 //@desc Update a specific category
 //@route PUT /category/:id
 //@access Private
-export const updateCategory = asyncHandler(async (req, res) => {
+export const updateCategory = asyncHandler(async (req, res,next) => {
     const {id} = req.params;
     const {name} = req.body;
     const category = await Category.findOneAndUpdate({_id:id},{name , slug:slugify(name)},{new:true});
     if(!category){
-        res.status(404).json({msg :`Category not found for this ID: ${id}`});
+        return next(new ApiError(`Category not found for this ID: ${id}`,404));
     }
     res.status(200).json({data:category});
 });
@@ -51,11 +51,11 @@ export const updateCategory = asyncHandler(async (req, res) => {
 //@desc Delete a specific category
 //@route DELETE /category/:id
 //@access Private
-export const deleteCategory = asyncHandler(async (req, res) => {
+export const deleteCategory = asyncHandler(async (req, res ,next) => {
     const {id} = req.params;
     const category = await Category.findByIdAndDelete(id);
     if(!category){
-        res.status(404).json({msg :`Category not found for this ID: ${id}`});
+        return next(new ApiError(`Category not found for this ID: ${id}`,404));
     }
     res.status(204).send();
 });
