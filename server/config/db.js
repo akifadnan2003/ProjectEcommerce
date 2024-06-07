@@ -6,9 +6,10 @@ const connectDB = async () => {
         dbName: process.env.MONGODB_DB
     }).then(() => {
         console.log('Database connection successful');
-    }).catch((error) => {
-        console.log(`Database connection error: ${error.message}`);
-    });
+    })
+    // .catch((error) => {
+    //     console.log(`Database connection error: ${error.message}`);
+    // });
 }
 
 export default connectDB;
