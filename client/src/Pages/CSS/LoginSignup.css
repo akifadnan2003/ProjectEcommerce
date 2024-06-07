@@ -1,57 +1,87 @@
-.loginsignup{
+.loginsignup {
     width: 100%;
     min-height: 90vh;
-    background: #fce3fe;
+    background: linear-gradient(135deg, #c33764, #1d2671); /* Purple to pink gradient */
     padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.loginsignup-container{
+
+
+.loginsignup-container {
     width: 90%;
     max-width: 550px;
     background: white;
-    margin: auto;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
     padding: 30px 40px;
     box-sizing: border-box;
 }
-.loginsignup-container h1{
+
+.loginsignup-container h1 {
     margin: 15px 0px;
+    text-align: center; /* Center the title */
+    color: #5c5c5c;
 }
-.loginsignup-fields{
+
+.loginsignup-fields {
     display: flex;
     flex-direction: column;
     gap: 25px;
     margin-top: 20px;
 }
-.loginsignup-fields input{
+
+.loginsignup-fields input {
     height: 60px;
     width: 100%;
     padding-left: 20px;
-    border: 1px solid #c9c9c9;
+    border: none; /* Remove the border */
+    border-bottom: 2px solid #c9c9c9; /* Add a bottom border */
     outline: none;
     color: #5c5c5c;
     font-size: 18px;
     box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Smooth color transition */
+    margin-bottom: 20px; /* Add some space below the input field */
 }
-.loginsignup-container button{
-    width: 100%;
-    height: 60px;
-    color: white;
-    background: #ff4141;
-    margin-top: 30px;
-    border: none;
-    font-size: 22px;
-    font-weight: 500;
-    cursor: pointer;
+
+.loginsignup-fields input:focus {
+    border-color: #f6d365; /* Change the bottom border color when the input is focused */
 }
-.Googlebutton{
+
+.loginsignup-container button {
     width: 100%;
-    height: 60px;
-    color: white;
-    background: skyblue;
-    margin-top: 30px;
+    background-color: #c33764; /* Purple background */
     border: none;
-    font-size: 22px;
-    font-weight: 500;
+    color: white;
+    padding: 15px 0;
+    border-radius: 50px; /* Rounded button */
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth color transition */
+    margin-bottom: 20px; /* Add some space below the button */
+}
+
+.loginsignup-container button:hover {
+    background-color: #1d2671; /* Change the background color to pink when you hover over the button */
+}
+
+.loginsignup-container button:hover {
+    background-color: #fce3fe; /* Change the background color when you hover over the button */
+}
+.google-signup-button {
+    width: 100%;
+    background-color: #4285F4; /* Google blue */
+    border: none;
+    color: white;
+    padding: 15px 0;
+    border-radius: 50px; /* Rounded button */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.google-signup-button:hover {
+    background-color: #357ae8; /* Darker Google blue when you hover over the button */
 }
 .loginsignup-login{
     margin-top: 20px;

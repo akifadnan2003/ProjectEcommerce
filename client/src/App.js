@@ -9,7 +9,7 @@ import Login from './Pages/Login';
 import LoginSignup from './Pages/LoginSignup';
 import Footer from './Components/Footer/Footer';
 import AboutUs from './Pages/AboutUs'
-
+import ContactUs from './Pages/ContactUs';
 function App() {
   return (
     <div>
@@ -27,6 +27,7 @@ function App() {
         <Route path='/LoginSignup' element={<LoginSignup/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/AboutUs' element={<AboutUs/>}/>
+        <Route path='/ContactUs' element={<ContactUs/>}/>
       </Routes>
       <Footer/>
       </BrowserRouter>

@@ -80,9 +80,30 @@
     background: red;
     color: white;
 }
-.dropdown {
+.dropdown .dropbtn {
+    color: #626262;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-weight: 500;
     position: relative;
-    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.dropdown .dropbtn:hover {
+    color: #9b59b6; /* Change the color when you hover over the button */
+}
+
+.dropdown .dropbtn::after {
+    content: " \25BC"; /* Unicode down arrow */
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 5px; /* Adds some space between the text and the arrow */
 }
 
 .dropdown-content {
@@ -93,18 +114,24 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+    border-radius: 5px; /* Add rounded corners to the dropdown content */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px); /* Move the dropdown content up a bit */
+    opacity: 0;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    transform: translateY(0); /* Move the dropdown content back to its original position */
+    opacity: 1; /* Make the dropdown content fully visible */
 }
 
 .dropdown-content.open {
     display: block;
 }
 .dropdown .dropbtn {
-    background-color: #ab1c9d;
-    color: white;
+    background-color:none;
+    color: rgb(0, 0, 0);
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -112,7 +139,7 @@
 }
 
 .dropdown .dropbtn:hover, .dropdown .dropbtn:focus {
-    background-color: #58085c;
+    background-color: none;
 }
 
 .dropdown-content {

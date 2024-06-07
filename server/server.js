@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import connectDB from './config/db.js';
+import ApiError from './utils/apiError.js';
+import globalErrorHandler from './middlewares/errorMiddleware.js';
 import userRoute from './routes/userRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import categoryRoute from './routes/categoryRoute.js';
@@ -28,11 +30,28 @@ if(process.env.NODE_ENV === 'development') {
   console.log('Morgan enabled');
 }
 
-// Routes
+// Mount Routes
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/category', categoryRoute);
 
-app.listen(PORT, () => {
+// Errors customizing
+app.all('*', (req, res, next) => {
+  next(new ApiError(`Can't find this route:${req.originalUrl}`,400));
+})
+// Global error handler middleware in Express
+app.use(globalErrorHandler);
+
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+
+//Handle unhandled promise rejections outside of express
+process.on('unhandledRejection', (err, promise) => {
+  console.error(`UnhandledRejection Errors : ${err.name} | ${err.message}`);
+  server.close(() => {
+    console.error(`Shutting down the server due to unhandled promise rejection`);
+    process.exit(1);
+  });
 });
