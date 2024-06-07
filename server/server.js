@@ -7,9 +7,11 @@ import globalErrorHandler from './middlewares/errorMiddleware.js';
 import userRoute from './routes/userRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import categoryRoute from './routes/categoryRoute.js';
+import productRoute from './routes/productRout.js';
 import morgan from 'morgan'; // For logging requests
 
 dotenv.config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3476;
@@ -25,7 +27,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
   console.log('Morgan enabled');
 }
@@ -34,10 +36,11 @@ if(process.env.NODE_ENV === 'development') {
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/category', categoryRoute);
+app.use('/product', productRoute);
 
 // Errors customizing
 app.all('*', (req, res, next) => {
-  next(new ApiError(`Can't find this route:${req.originalUrl}`,400));
+  next(new ApiError(`Can't find this route:${req.originalUrl}`, 400));
 })
 // Global error handler middleware in Express
 app.use(globalErrorHandler);
