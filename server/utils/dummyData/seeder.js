@@ -3,11 +3,11 @@ import dotenv from 'dotenv';
 import Product from '../../models/productModel.js';
 import connectDB from '../../config/db.js';
 
-dotenv.config();
+dotenv.config({ path: '../../.env' });
 
 //connect to database
 connectDB();
-
+console.log(process.env.MONGODB_URI);
 //Read data
 const products = JSON.parse(fs.readFileSync('./products.json'), 'utf-8');
 
@@ -18,7 +18,7 @@ const insertData = async () => {
         console.log('Data inserted successfully'.green.inverse);
         process.exit();
     } catch (error) {
-        console.error('Error while importing data');
+        console.error('Error while inserting data');
     }
 };
 
