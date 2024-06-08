@@ -3,20 +3,20 @@ import slugify from 'slugify';
 import Category from '../models/categoryModel.js';
 import asyncHandler from 'express-async-handler';
 import ApiError from '../utils/apiError.js';
+import ApiFeatures from '../utils/apiFeatures.js';
+import e from 'express';
 
 //@desc Get all products
 //@route GET /product
 //@access Public
 export const getProducts = asyncHandler(async (req, res) => {
-    // Pagination
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 12;
-    const skip = (page - 1) * limit;
-    const products = await Product
-        .find({}).skip(skip)
-        .limit(limit)
-        .populate({ path: 'category', select: 'name-_id' });
-    res.status(200).json({ results: products.length, page, data: products });
+    //build query
+    const documentsCount = await Product.countDocuments();
+    const apiFeatures = new ApiFeatures(Product.find(), req.query).paginate(documentsCount).filter().sort().limitFields().search();
+     //execute query
+     const {mongooseQuery , paginationResults} = apiFeatures;
+     const products = await apiFeatures.mongooseQuery;
+     res.status(200).json({ results: products.length,paginationResults, data: products });
 });
 
 //@desc Get a specific product by id
@@ -45,7 +45,7 @@ export const createProduct = asyncHandler(async (req, res) => {
 //@access Private
 export const updateProduct = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    if(req.body.title){
+    if (req.body.title) {
         req.body.slug = slugify(req.body.title);
     }
     const product = await Product.findOneAndUpdate({ _id: id },
