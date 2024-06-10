@@ -1,13 +1,18 @@
-import { check } from "express-validator";
+import { check ,body} from "express-validator";
 import validatorMiddleware from "../../middlewares/validatorMiddleware.js";
 import Category from "../../models/categoryModel.js";
+import slugify from "slugify";
 
 //Create validator for product routes with specific rules
 export const createProductValidator = [
     check("title", "Title is required")
         .notEmpty()
         .isLength({ min: 3, max: 32 })
-        .withMessage("Product title must be between 3 to 32 characters"),
+        .withMessage("Product title must be between 3 to 32 characters")
+        .custom((val, { req }) => {
+            req.body.slug = slugify(val);
+            return true;
+        }),
     check("description", "Description is required")
         .notEmpty()
         .isLength({ min: 10, max: 2000 })
@@ -75,6 +80,10 @@ export const updateProductValidator = [
     check("id", "Product ID is required")
         .isMongoId()
         .withMessage("Product ID must be a valid MongoDB ID"),
+    body('title').custom((val, { req }) => {
+        req.body.slug = slugify(val);
+        return true;
+    })
 ];
 
 export const deleteProductValidator = [

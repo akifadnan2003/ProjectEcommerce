@@ -1,3 +1,5 @@
+import { model } from "mongoose";
+
 class ApiFeatures {
     constructor(mongooseQuery, queryString) {
         this.mongooseQuery = mongooseQuery;
@@ -35,13 +37,18 @@ class ApiFeatures {
         }
         return this;
     }
-    search() {
+    search(modelName) {
         if (this.queryString.search) {
-            const search = {};
-            search.$or = [
-                { title: { $regex: this.queryString.search, $options: 'i' } },
-                { description: { $regex: this.queryString.search, $options: 'i' } },
-            ];
+            let search = {};
+            if(modelName === 'Product'){
+                search.$or = [
+                    { title: { $regex: this.queryString.search, $options: 'i' } },
+                    { description: { $regex: this.queryString.search, $options: 'i' } },
+                ];
+            }else{
+                search ={name: { $regex: this.queryString.search, $options: 'i' }};
+            }
+            
             this.mongooseQuery = this.mongooseQuery.find(search);
         }
         return this;
@@ -49,7 +56,7 @@ class ApiFeatures {
 
     paginate(countDocuments) {
         const page = this.queryString.page * 1 || 1;
-        const limit = this.queryString.limit * 1 || 50;
+        const limit = this.queryString.limit * 1 || 12;
         const skip = (page - 1) * limit;
         const endIndex = page * limit;
 
@@ -61,18 +68,14 @@ class ApiFeatures {
 
         //next page
         if (endIndex < countDocuments) {
-            pagination.next = {
-                page: page + 1,
-            };
+            pagination.next = page + 1;
         }
         if (skip > 0) {
-            pagination.prev = {
-                page: page - 1,
-            };
+            pagination.prev = page - 1;
         }
 
         this.mongooseQuery = this.mongooseQuery.skip(skip).limit(limit);
-        this.pagination = pagination;
+        this.paginationResult = pagination;
         return this;
     }
 }
