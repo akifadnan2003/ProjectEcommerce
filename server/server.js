@@ -8,6 +8,7 @@ import userRoute from './routes/userRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import categoryRoute from './routes/categoryRoute.js';
 import productRoute from './routes/productRout.js';
+import apiRoute from './routes/apiRoute.js';
 import morgan from 'morgan'; // For logging requests
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/category', categoryRoute);
 app.use('/product', productRoute);
+app.use('/api', apiRoute);
 
 // Errors customizing
 app.all('*', (req, res, next) => {
