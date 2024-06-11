@@ -28,7 +28,7 @@ export const checkAuth = async (req, res, next) => {
     } catch (error) {
         res.status(401).json({
             success: false,
-            error: 'Not authenticated'
+            error: 'Not authenticated CHECK AUTH' + error.message
         });
     }
 };
