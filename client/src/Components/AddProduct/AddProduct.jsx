@@ -64,9 +64,9 @@ const AddProduct = () => {
       <div className="addproduct-itemfield">
         <select name="category" value={product.category} onChange={handleChange} className="add-product-selector" required>
           <option value="">Select Category</option>
-          <option value="Curtain">Curtain</option>
+          <option value="Thick Curtains">Thick Curtains</option>
           <option value="UV Curtains">UV Curtains</option>
-          <option value="Blinds">Blinds</option>
+          <option value="Window Blinds">Windows Blinds</option>
         </select>
       </div>
       <button type="submit" className="addproduct-btn">Add Product</button>
