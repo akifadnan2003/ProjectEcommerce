@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { ShopContext } from '../Context/ShopContext'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -8,17 +8,28 @@ import DescriptionBox from '../Components/DescriptionBox/DescriptionBox';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
 
 const Product = () => {
+  const { all_product } = useContext(ShopContext);
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await axios.get('http://localhost:4000/product/' + productId);
-      setProduct(response.data.data);
-    };
+    if (productId >= 1 && productId < 100) {
+      const productFromContext = all_product.find((e) => e.id === Number(productId));
+      setProduct(productFromContext);
+    } else {
+      const fetchProduct = async () => {
+        try {
+          const response = await axios.get('http://localhost:4000/product/' + productId);
+          setProduct(response.data.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
-    fetchProduct();
-  }, [productId]);
+      fetchProduct();
+    }
+  }, [productId, all_product]);
+
 
   if (!product) {
     return <div>Loading...</div>;
