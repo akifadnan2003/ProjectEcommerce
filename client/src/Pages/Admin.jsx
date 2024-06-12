@@ -4,6 +4,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import AddProduct from "../Components/AddProduct/AddProduct";
 import { Route, Routes } from "react-router-dom";
 import ListProduct from "../Components/ListProduct/ListProduct";
+import AIDesign from "../Components/AIDesign/AIDesign";
 import Orders from "../Components/Orders/Orders";
 
 const Admin = () => {
@@ -14,6 +15,7 @@ const Admin = () => {
       <Routes>
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/listproduct" element={<ListProduct />} />
+        <Route path="/ai-design" element={<AIDesign />} />
         <Route path="/Orders" element={<Orders />} />
       </Routes>
     </div>

@@ -12,6 +12,7 @@
   width: 100%;
   color: #7b7b7b;
   font-size: 16px;
+  margin-bottom: 1rem;
 }
 
 .addproduct-itemfield input {
@@ -32,9 +33,19 @@
   gap: 40px;
 }
 
+.feedback {
+  background-color: #00d9ff;
+  padding: 1rem;
+  padding-inline: 4rem;
+  margin: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
 .add-product-selector {
   padding: 10px 10px;
-  width: 100px;
   height: 50px;
   font-size: 14px;
   color: #7b7b7b;
@@ -56,6 +67,12 @@
 
 .addproduct-itemfield div img {
   margin-left: -30px;
+}
+
+.addproduct-itemfield textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
 }
 
 .addproduct-btn {

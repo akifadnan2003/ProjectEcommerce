@@ -45,15 +45,6 @@ export const createProductValidator = [
     check("images", "Product images must be an array of strings")
         .optional()
         .isArray(),
-    check("category", "Category is required")
-        .notEmpty()
-        .isMongoId()
-        .withMessage("Category must be a valid MongoDB ID")
-        .custom((categoryId) => Category.findById(categoryId).then((category) => {
-            if (!category) {
-                return Promise.reject(new Error(`No Category for this ID ${categoryId}`));
-            }
-        })),
     check("ratingsAverage", "Ratings average is required")
         .optional()
         .isNumeric()
