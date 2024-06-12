@@ -1,98 +1,77 @@
 import React, { useState } from "react";
 import "./AddProduct.css";
 import upload_area from "../Assets/upload_area.svg";
+import axios from "axios";
 
 const AddProduct = () => {
-
-  const [image, setImage] = useState(false);
-  const [productDetails, setProductDetails] = useState({
-    name: "",
-    image: "",
-    category: "Curtains",
-    new_price: "",
-    old_price: ""
+  const [product, setProduct] = useState({
+    title: "",
+    description: "",
+    price: "",
+    priceAfterDiscount: "",
+    productSize: "",
+    imageCover: "",
+    images: [],
+    category: "",
+    sold: 0,
+    ratingsAverage: 4.0,
+    ratingsQuantity: 0,
   });
 
-  const AddProduct = async () => {
+  const [feedback, setFeedback] = useState("");
 
-    let dataObj;
-    let product = productDetails;
+  const handleChange = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
 
-    let formData = new FormData();
-    formData.append('product', image);
-
-    await fetch('http://localhost:4000/upload', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-      },
-      body: formData,
-    })
-      .then((resp) => resp.json())
-      .then((data) => { dataObj = data });
-
-    if (dataObj.success) {
-      product.image = dataObj.image_url;
-      console.log(product);
-      await fetch('http://localhost:4000/addproduct', {
-        method: 'POST',
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:4000/product/', product, {
         headers: {
-          Accept: 'application/json',
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(product),
-      })
-        .then((resp) => resp.json())
-        .then((data) => { data.success ? alert("Product Added") : alert("Failed") });
-
+      });
+      setFeedback("Upload successful!");
+    } catch (error) {
+      console.error(error);
+      setFeedback("Upload failed!");
     }
-  }
-
-  const changeHandler = (e) => {
-    console.log(e);
-    setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
-  }
-
-  const imageHandler = (e) => {
-    setImage(e.target.files[0]);
-  }
+  };
 
   return (
-    <div className="addproduct">
+    <form onSubmit={handleSubmit} className="addproduct">
+
       <div className="addproduct-itemfield">
-        <p>Product title</p>
-        <label htmlFor="file-input">
-          <img className="addproduct-thumbnail-img" src={!image ? upload_area : URL.createObjectURL(image)} alt="" />
-        </label>
-        <input onChange={(e) => { imageHandler(e) }} type="file" name="image" id="file-input" hidden />
-      </div>
-      <div className="addproduct-price">
-        <div className="addproduct-itemfield">
-          <p>Price</p>
-          <input type="text" name="old_price" value={productDetails.old_price} onChange={(e) => { changeHandler(e) }} placeholder="Type here" />
-        </div>
-        <div className="addproduct-itemfield">
-          <p>Offer Price</p>
-          <input type="text" name="new_price" value={productDetails.new_price} onChange={(e) => { changeHandler(e) }} placeholder="Type here" />
-        </div>
+        <input name="title" value={product.title} onChange={handleChange} placeholder="Title" required />
       </div>
       <div className="addproduct-itemfield">
-        <p>Product category</p>
-        <select value={productDetails.category} name="category" className="add-product-selector" onChange={changeHandler}>
+        <input name="price" value={product.price} onChange={handleChange} placeholder="Price" required />
+      </div>
+      <div className="addproduct-itemfield">
+        <textarea name="description" value={product.description} onChange={handleChange} placeholder="Description" required />
+      </div>
+      <div className="addproduct-itemfield">
+        <input name="priceAfterDiscount" value={product.priceAfterDiscount} onChange={handleChange} placeholder="Price After Discount" />
+      </div>
+      <div className="addproduct-itemfield">
+        <input name="productSize" value={product.productSize} onChange={handleChange} placeholder="Product Size" required />
+      </div>
+      <div className="addproduct-itemfield">
+        <input name="imageCover" value={product.imageCover} onChange={handleChange} placeholder="Image Cover URL" required />
+      </div>
+      <div className="addproduct-itemfield">
+        <select name="category" value={product.category} onChange={handleChange} className="add-product-selector" required>
+          <option value="">Select Category</option>
           <option value="Curtain">Curtain</option>
-          <option value="UV Curtains">UV curtains</option>
+          <option value="UV Curtains">UV Curtains</option>
           <option value="Blinds">Blinds</option>
         </select>
       </div>
-      <div className="addproduct-itemfield">
-        <p>Product title</p>
-        <label htmlFor="file-input">
-          <img className="addproduct-thumbnail-img" src={!image ? upload_area : URL.createObjectURL(image)} alt="" />
-        </label>
-        <input onChange={(e) => { imageHandler(e) }} type="file" name="image" id="file-input" hidden />
-      </div>
-      <button className="addproduct-btn" onClick={() => { AddProduct() }}>ADD</button>
-    </div>
+      <button type="submit" className="addproduct-btn">Add Product</button>
+      <span className="feedback">{feedback}</span> 
+    </form>
   );
 };
 

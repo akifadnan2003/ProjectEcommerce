@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const productSchema = new mongoose.Schema({
     title: {
@@ -45,7 +46,7 @@ const productSchema = new mongoose.Schema({
     },
     images: [String],
     category: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         ref: 'Category',
         required: [true, 'Category is required'],
     },
@@ -62,13 +63,11 @@ const productSchema = new mongoose.Schema({
 }
     , { timestamps: true });
 
-//Mongoose query middleware to populate category
-productSchema.pre(/^find/, function (next) {
-    this.populate({
-        path: 'category',
-        select: 'name -_id',
-    });
-    next();
+productSchema.pre('save', function (next) {
+  if (!this.slug) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
+  }
+  next();
 });
 
 const Product = mongoose.model('Product', productSchema);

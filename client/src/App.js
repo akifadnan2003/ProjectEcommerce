@@ -25,7 +25,7 @@ function Main() {
       {isAdminRoute ? <AdmNavbar /> : <Navbar />}
       <Routes>
         <Route path='/' element={<Shop />} />
-        <Route path='/Anti UV Curtains' element={<ShopCategory category="Anti UV Curtains" />} />
+        <Route path='/Anti UV Curtains' element={<ShopCategory category="UV Curtains" />} />
         <Route path='/Thick Curtains' element={<ShopCategory category="Thick Curtains" />} />
         <Route path='/Window Blinds' element={<ShopCategory category="Window Blinds" />} />
         <Route path="/product" element={<Product />}>

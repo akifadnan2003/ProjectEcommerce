@@ -18,11 +18,11 @@ const ProductDisplay = (props) => {
             <img src={product.image} alt="" />
         </div>
         <div className="productdisplay-img">
-            <img className='productdisplay-main-img' src={product.image} alt="" />
+            <img className='productdisplay-main-img' src={product.imageCover} alt="" />
         </div>
       </div>
       <div className="productdisplay-right">
-        <h1>{product.name}</h1>
+        <h1>{product.title}</h1>
         <div className="productdisplay-right-stars">
             <img src={star_icon} alt="" />
             <img src={star_icon} alt="" />
@@ -32,8 +32,8 @@ const ProductDisplay = (props) => {
             <p>(122)</p>
         </div>
         <div className="productdisplay-right-prices">
-            <div className="productdisplay-right-price-old">${product.old_price}</div>
-            <div className="productdisplay-right-price-new">${product.new_price}</div>
+            <div className="productdisplay-right-price-old">${product.price}</div>
+            <div className="productdisplay-right-price-new">${product.priceAfterDiscount}</div>
         </div>
         <div className="productdisplay-right-description">
         Anti UV Curtains
@@ -48,7 +48,7 @@ const ProductDisplay = (props) => {
                 <div>XXl</div>
             </div>
         </div>
-        <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+        <button onClick={()=>{addToCart(product._id)}}>ADD TO CART</button>
         <p className='productdisplay-right-category'><span>Category :</span> Anti UV Curtains</p>
         <p className='productdisplay-right-category'><span>Tags :</span>Modern, Latest</p>
       </div>
